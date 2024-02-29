@@ -22,8 +22,8 @@ const isEmptyTodoList = computed(() => !store.state.todos.length);
         <Todo
           class="main__todos"
           v-else
-          v-for="(todo, idx) in store.state.todos"
-          :key="idx"
+          v-for="todo in store.state.todos"
+          :key="todo.id"
           :todo="todo"
         />
       </div>

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import { Input } from '@/shared/input';
 import { Button } from '@/shared/button';
 
 const inputValue = ref<string>('');
+
 const store = useStore();
 
 function addTodoItem() {
