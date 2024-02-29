@@ -1,5 +1,6 @@
 import { createStore, Commit } from 'vuex';
 import { v4 as uuidv4 } from 'uuid';
+import createPersistedState from 'vuex-persistedstate';
 interface TodoItem {
   id: number;
   title: string;
@@ -14,6 +15,7 @@ interface State {
 }
 
 export default createStore<State>({
+  plugins: [createPersistedState()],
   state: {
     todos: [],
     isActive: false,
