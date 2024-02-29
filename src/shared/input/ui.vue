@@ -3,15 +3,24 @@ interface Props {
   placeholder?: string;
   value?: string;
 }
-
+const emit = defineEmits(['update:value']);
+const updateValue = (e) => {
+  emit('update:value', e.target.value);
+};
 const props = defineProps<Props>();
-const { placeholder, value } = props;
 </script>
 
 <template>
   <div class="mainInput">
     <label for="task">Название задачи</label>
-    <input class="input" type="text" name="task" :placeholder="placeholder" :value="value" />
+    <input
+      class="input"
+      type="text"
+      name="task"
+      :placeholder="placeholder"
+      :value="props.value"
+      @input="updateValue"
+    />
   </div>
 </template>
 

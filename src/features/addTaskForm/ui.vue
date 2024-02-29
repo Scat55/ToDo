@@ -1,12 +1,22 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { useStore } from 'vuex';
 import { Input } from '@/shared/input';
 import { Button } from '@/shared/button';
+
+const inputValue = ref<string>('');
+const store = useStore();
+
+function test() {
+  store.dispatch('addNewTodo', inputValue.value);
+  inputValue.value = '';
+}
 </script>
 
 <template>
-  <form class="form">
-    <Input />
-    <Button class="form__btn">Создать</Button>
+  <form class="form" @submit.prevent="test">
+    <Input v-model:value="inputValue" />
+    <Button type="submit" class="form__btn">Создать</Button>
   </form>
 </template>
 
