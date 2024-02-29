@@ -7,14 +7,15 @@ import { Button } from '@/shared/button';
 const inputValue = ref<string>('');
 const store = useStore();
 
-function test() {
+function addTodoItem() {
   store.dispatch('addNewTodo', inputValue.value);
   inputValue.value = '';
+  store.state.isActive = false;
 }
 </script>
 
 <template>
-  <form class="form" @submit.prevent="test">
+  <form class="form" @submit.prevent="addTodoItem">
     <Input v-model:value="inputValue" />
     <Button type="submit" class="form__btn">Создать</Button>
   </form>
@@ -32,7 +33,9 @@ function test() {
   background: white;
   border-radius: 10px;
   transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(190, 190, 190),
+  box-shadow:
+    inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgb(190, 190, 190),
     0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 
   &__btn {

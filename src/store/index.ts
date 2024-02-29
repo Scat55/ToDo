@@ -1,28 +1,38 @@
-import { createStore } from 'vuex';
+import { createStore, Commit } from 'vuex';
 
-export default createStore({
+interface TodoItem {
+  title: string;
+  completed: boolean;
+}
+
+interface State {
+  todos: TodoItem[];
+  isActive: boolean;
+}
+
+export default createStore<State>({
   state: {
     todos: [],
     isActive: false,
   },
   mutations: {
     // Добаляем новый todo_item
-    new_todo(state, todoItem) {
+    new_todo(state: State, todoItem: string) {
       state.todos.push({
         title: todoItem,
         completed: false,
       });
-      const localState = sessionStorage.setItem('todos', JSON.stringify(state.todos));
+      sessionStorage.setItem('todos', JSON.stringify(state.todos));
     },
-    change_status(state) {
+    change_status(state: State) {
       state.isActive = true;
     },
   },
   actions: {
-    changeStatusForm({ commit }) {
+    changeStatusForm({ commit }: Commit) {
       commit('change_status');
     },
-    addNewTodo({ commit }, todoItem) {
+    addNewTodo({ commit }: Commit, todoItem: string) {
       commit('new_todo', todoItem);
     },
   },
