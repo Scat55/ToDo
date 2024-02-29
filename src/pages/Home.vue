@@ -6,7 +6,9 @@ import { Button } from '@/shared/button';
   <main>
     <div class="main">
       <h1 class="main__title">TODOS</h1>
-      <div class="main__button"><Button>К списку дел</Button></div>
+      <div class="main__button">
+        <RouterLink to="/tasks"><Button>К списку дел</Button></RouterLink>
+      </div>
     </div>
   </main>
 </template>
