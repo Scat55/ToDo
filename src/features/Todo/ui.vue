@@ -14,8 +14,9 @@ const { todo } = props;
 
 const store = useStore();
 
-function openEditForm() {
-  store.commit('change_status');
+function showModalForEditing() {
+  store.dispatch('setSelectedTodo', props.todo);
+  store.dispatch('changeEditingForm'); // Открываем модальное окно для редактирования
 }
 
 function deleteItem() {
@@ -25,7 +26,7 @@ function deleteItem() {
 
 <template>
   <div class="todos">
-    <div class="todo" @click="openEditForm()">
+    <div class="todo" @click="showModalForEditing">
       <span class="todo__title">{{ todo.title }}</span>
       <img @click.stop="deleteItem()" src="@/app/assets/images/deleteIcon.svg" alt="" />
     </div>

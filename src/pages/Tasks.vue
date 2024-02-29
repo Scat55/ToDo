@@ -2,12 +2,14 @@
 import Header from '@/widgets/header/index.vue';
 import { Form } from '@/features/addTaskForm';
 import { Todo } from '@/features/Todo';
+import { ChangeForm } from '@/features/changeValueForm';
 
 import { useStore } from 'vuex';
 import { computed } from 'vue';
 
 const store = useStore();
 const isActive = computed(() => store.state.isActive);
+const isActiveChangeForm = computed(() => store.state.changeForm);
 const isEmptyTodoList = computed(() => !store.state.todos.length);
 </script>
 
@@ -28,7 +30,7 @@ const isEmptyTodoList = computed(() => !store.state.todos.length);
         />
       </div>
 
-      <div class="main__form" v-if="isActive"><Form /></div>
+      <div class="main__form"><Form v-if="isActive" /><ChangeForm v-if="isActiveChangeForm" /></div>
     </main>
   </div>
 </template>

@@ -9,12 +9,16 @@ interface TodoItem {
 interface State {
   todos: TodoItem[];
   isActive: boolean;
+  changeForm: boolean;
+  selectedTodo: TodoItem | null;
 }
 
 export default createStore<State>({
   state: {
     todos: [],
     isActive: false,
+    changeForm: false,
+    selectedTodo: null,
   },
   mutations: {
     // Добаляем новый todo_item
@@ -30,10 +34,22 @@ export default createStore<State>({
       state.isActive = true;
     },
 
+    change_editing(state: State) {
+      state.changeForm = !state.changeForm;
+    },
+
     // Удалеям todo_item по индексу
     delete_todo(state: State, todoItem: TodoItem) {
       let index = state.todos.indexOf(todoItem);
       state.todos.splice(index, 1);
+    },
+    setSelectedTodo(state: State, todo: TodoItem) {
+      state.selectedTodo = todo;
+    },
+    updateTodo(state: State, updatedTodo: TodoItem) {
+      if (state.selectedTodo) {
+        state.selectedTodo.title = updatedTodo.title;
+      }
     },
   },
   actions: {
@@ -45,10 +61,20 @@ export default createStore<State>({
     addNewTodo({ commit }: Commit, todoItem: string) {
       commit('new_todo', todoItem);
     },
+    // Открытие формы редактирования
+    changeEditingForm({ commit }: Commit) {
+      commit('change_editing');
+    },
     //Удаление Todo
     deleteTodo({ commit }: Commit, todoItem: TodoItem) {
       commit('delete_todo', todoItem);
     },
+    setSelectedTodo({ commit }: { commit: Commit }, todo: TodoItem) {
+      commit('setSelectedTodo', todo);
+    },
     // Редактирование элемента
+    updateTodo({ commit }: { commit: Commit }, updatedTodo: TodoItem) {
+      commit('updateTodo', updatedTodo);
+    },
   },
 });
