@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { Button } from '@/shared/button';
+
+import { useStore } from 'vuex';
+
+const store = useStore();
+
+function changeStatusForm() {
+  store.dispatch('changeStatusForm');
+}
 </script>
 
 <template>
   <div class="header">
     <h1 class="header__title">TODOS</h1>
-    <Button class="header__btn"> Создать </Button>
+    <Button @click="changeStatusForm" class="header__btn"> Создать </Button>
   </div>
 </template>
 
