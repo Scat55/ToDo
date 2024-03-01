@@ -39,13 +39,9 @@ const isEmptyTodoList = computed(() => !store.state.todos.length);
 .main {
   position: relative;
   &__form {
-    position: absolute;
-    top: 100px;
-    left: 270px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
   }
 }
 
